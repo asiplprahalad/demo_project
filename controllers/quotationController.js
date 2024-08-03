@@ -1,4 +1,5 @@
 const Quotation = require('../models/Quotation');
+const generatePDF = require('../utils/generatePDF');
 
 exports.getQuotations = async (req, res) => {
   try {
@@ -24,6 +25,7 @@ exports.downloadQuotation = async (req, res) => {
 
     res.send(pdfBuffer);
   } catch (e) {
+    console.log('e-------->>',e);
     res.status(500).json({ message: 'Server error' });
   }
 };

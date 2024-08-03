@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
+const ProductSchema = require('./Product').schema;
 
 const QuotationSchema = new mongoose.Schema({
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-  //products: [ProductSchema],
-  products: [],
+  products: [ProductSchema],
   date: { type: Date, default: Date.now }
 });
 

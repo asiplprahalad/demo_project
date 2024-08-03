@@ -2,15 +2,13 @@ const Quotation = require('../models/Quotation');
 const generatePDF = require('../utils/generatePDF');
 
 exports.addProducts = async (req, res) => {
-    console.log('req.body-------->>',req.body);
-  const { products } = req.body;
   try {
     const newQuotation = new Quotation({
       user: req.user.id,
-      products,
+      products : req.body,
       date: new Date()
     });
-
+   // console.log('newQuotation-------->>',newQuotation);
     await newQuotation.save();
     const pdfBuffer = await generatePDF(newQuotation);  // Implement generatePDF in utils
 
@@ -22,7 +20,7 @@ exports.addProducts = async (req, res) => {
 
     res.send(pdfBuffer);
   } catch (e) {
-    console.log('e-------->>',e);
+    //console.log('e-------->>',e);
     res.status(500).json({ message: 'Server error' });
   }
 };
